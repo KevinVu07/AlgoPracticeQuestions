@@ -25,15 +25,13 @@ var binaryGap = function (n) {
       distance = rightPointer - leftPointer;
       leftPointer = rightPointer;
     }
-    if (distance > maxDistance) {
-      maxDistance = distance;
-    }
+    maxDistance = distance > maxDistance ? distance : maxDistance;
   }
 
-  longestBinaryGap = maxDistance - 1;
+  maxGap = maxDistance - 1;
 
-  if (longestBinaryGap > 0) {
-    return longestBinaryGap;
+  if (maxGap > 0) {
+    return maxGap;
   } else {
     return 0;
   }
