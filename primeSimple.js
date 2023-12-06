@@ -8,35 +8,32 @@ After that, prime numbers are:
 */
 
 var primeSimple = function (A, B) {
-  let numberOfPrimeNumbers = 0;
+  // Create an array where each element starts as true
+  const range = B - A;
+  const arrLen = range + 1;
 
-  if (A <= 7 && B <= 7) {
-    for (let i = A; i <= B; i++) {
-      if (i == 2 || i == 3 || i == 5 || i == 7) {
-        numberOfPrimeNumbers = numberOfPrimeNumbers + 1;
-      }
+  const numsArr = Array.from({ length: B + 1 }, () => true);
+
+  const primeNumbers = [];
+
+  for (let i = 2; i <= B; i++) {
+    if (numsArr[i] && i >= A) {
+      primeNumbers.push(i);
+      // console.log(primeNumbers);
     }
-  } else if (A < 2 && B > 7) {
-    numberOfPrimeNumbers = 4;
-    for (let i = 8; i <= B; i += 2) {
-      if (i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0) {
-        numberOfPrimeNumbers = numberOfPrimeNumbers + 1;
-      }
-    }
-  } else if (A > 7 && A % 2 == 1) {
-    for (let i = A; i <= B; i += 2) {
-      if (i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0) {
-        numberOfPrimeNumbers = numberOfPrimeNumbers + 1;
-      }
-    }
-  } else if (A > 7 && A % 2 == 0) {
-    for (let i = A + 1; i <= B; i += 2) {
-      if (i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0) {
-        numberOfPrimeNumbers = numberOfPrimeNumbers + 1;
-      }
+
+    /* 
+      convert all elements in the numsArr 
+      whose indexes are multiples of i 
+      to false
+      */
+    for (let j = i + i; j <= B; j += i) {
+      numsArr[j] = false;
     }
   }
-  return numberOfPrimeNumbers;
+  console.log(numsArr);
+  // console.log(primeNumbers);
+  return primeNumbers.length;
 };
 
 answer1 = primeSimple(1, 10);
